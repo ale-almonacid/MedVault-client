@@ -54,7 +54,7 @@ function UserProfilePage() {
 
         <Separator></Separator>
 
-         <Tabs className="py-3" defaultValue="password">
+         <Tabs className="py-6" defaultValue="password">
       <TabsList variant="line">
         <TabsTrigger value="password">Password</TabsTrigger>
         <TabsTrigger value="email">Email</TabsTrigger>
@@ -69,7 +69,7 @@ function UserProfilePage() {
       </div>
 
 
-      <div className='flex flex-col gap-1 px-5 py-6'>
+      <div className='flex flex-col gap-1 px-5 pb-6'>
         <h2 className='heading-h2 text-slate-900'>Danger zone</h2>
 
         <Separator></Separator>

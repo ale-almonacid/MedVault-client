@@ -8,27 +8,36 @@ import {
   AvatarImage,
 } from "@/components/ui/avatar"
 
-function AvatarGroupCountComp() {
-  return (
-     <AvatarGroup >
-      <Avatar>
-        <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-        <AvatarFallback>CN</AvatarFallback>
-      </Avatar>
-      <Avatar >
-        <AvatarImage src="https://github.com/maxleiter.png" alt="@maxleiter" />
-        <AvatarFallback>LR</AvatarFallback>
-      </Avatar>
-      <Avatar >
-        <AvatarImage
-          src="https://github.com/evilrabbit.png"
-          alt="@evilrabbit"
-        />
-        <AvatarFallback>ER</AvatarFallback>
-      </Avatar>
-      <AvatarGroupCount>+3</AvatarGroupCount>
-    </AvatarGroup>
+const MAX_VISIBLE_AVATARS = 3
 
+function getInitials(username) {
+  if (!username) {
+    return "?"
+  }
+
+  return username
+    .split(" ")
+    .map((part) => part[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase()
+}
+
+function AvatarGroupCountComp({ users = [] }) {
+
+  const visibleUsers = users.slice(0, MAX_VISIBLE_AVATARS)
+  const hiddenCount = users.length - visibleUsers.length
+
+  return (
+    <AvatarGroup>
+      {visibleUsers.map((user) => (
+        <Avatar key={user._id}>
+          <AvatarImage src={user.avatar} alt={user.username} />
+          <AvatarFallback>{getInitials(user.username)}</AvatarFallback>
+        </Avatar>
+      ))}
+      {hiddenCount > 0 && <AvatarGroupCount>+{hiddenCount}</AvatarGroupCount>}
+    </AvatarGroup>
   )
 }
 

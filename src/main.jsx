@@ -5,15 +5,18 @@ import './index.css'
 import App from './App.jsx'
 import { ThemeProvider } from './components/theme-provider'
 import { AuthWrapper } from './context/auth.context.jsx';
+import { MedicalProfileWrapper } from './context/medicalProfile.context.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
     <ThemeProvider>
 
-    <AuthWrapper>  
+    <AuthWrapper>
+    <MedicalProfileWrapper>
     <App />
-    </AuthWrapper> 
+    </MedicalProfileWrapper>
+    </AuthWrapper>
 
     </ThemeProvider>
     </BrowserRouter>
