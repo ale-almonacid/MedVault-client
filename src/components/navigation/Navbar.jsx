@@ -17,8 +17,8 @@ function Navbar() {
           </Link>
 
           <div className="hidden items-center gap-6 text-sm text-muted-foreground sm:flex">
-            <Link to="/medical-profile" className="hover:text-foreground">
-              Medical profiles
+            <Link to="/dashboard" className="hover:text-foreground">
+              Dashboard
             </Link>
             <Link to="/about" className="hover:text-foreground">
               About

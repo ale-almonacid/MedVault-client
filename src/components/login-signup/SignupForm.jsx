@@ -13,11 +13,54 @@ import { Label } from "@/components/ui/label"
 
 function SignupForm({ className, ...props }) {
 
+    const navigate = useNavigate()
+
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  //state for the error messages 
+  const [errorMessage, setErrorMessage] = useState(null)
+
+  const handleEmailChange = (e) => setEmail(e.target.value);
+  const handleUsernameChange = (e) => setUsername(e.target.value);
+  const handlePasswordChange = (e) => setPassword(e.target.value);
+
+  const handleSignup = async (e) => {
+    e.preventDefault();
+
+    const body ={
+      email, 
+      username,
+      password
+    }
+
+    try{
+
+      // ... contact backend to register the user
+      //await axios.post(`${import.meta.env.VITE_SERVER_URL}/api/auth/signup`, body)
+
+      await service.post("/auth/signup", body)
+      console.log("all good, user created, maybe")
+      navigate("/login")
+
+    }catch(error){
+      console.log(error)
+      if (error.response.status === 400){
+        setErrorMessage(error.response.data.errorMessage)
+      }else {
+        //we should send the user to an error page 
+      }
+
+    }
+
+  };
+
     
 
   return (
     
-    <form className={cn("flex flex-col gap-6 w-full max-w-sm", className)} {...props}>
+    <form onSubmit={handleSignup} className={cn("flex flex-col gap-6 w-full max-w-sm", className)} {...props}>
       <div className="flex flex-col items-center gap-1 text-center">
         <h1 className="text-2xl font-medium tracking-tight">Create your account</h1>
         <p className="text-sm text-balance text-muted-foreground">
@@ -29,13 +72,25 @@ function SignupForm({ className, ...props }) {
         {/* Full Name */}
         <div className="grid gap-2">
           <Label htmlFor="name">Full Name</Label>
-          <Input id="name" type="text" placeholder="John Doe" required />
+          <Input 
+          id="name" 
+          type="text" 
+          placeholder="John Doe" 
+          required
+          value={username}
+          onChange={handleUsernameChange} />
         </div>
 
         {/* Email */}
         <div className="grid gap-2">
           <Label htmlFor="email">Email</Label>
-          <Input id="email" type="email" placeholder="m@example.com" required />
+          <Input 
+          id="email" 
+          type="email" 
+          placeholder="m@example.com" 
+          required
+          value={email}
+          onChange={handleEmailChange} />
           <p className="text-xs text-muted-foreground">
             We&apos;ll use this to contact you. We will not share your email with anyone else.
           </p>
@@ -44,7 +99,13 @@ function SignupForm({ className, ...props }) {
         {/* Password */}
         <div className="grid gap-2">
           <Label htmlFor="password">Password</Label>
-          <Input id="password" type="password" required />
+          <Input 
+          id="password" 
+          type="password" 
+          required 
+          value={password}
+          onChange={handlePasswordChange}
+          />
           <p className="text-xs text-muted-foreground">
             Must be at least 8 characters long.
           </p>
