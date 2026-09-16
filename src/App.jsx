@@ -1,6 +1,7 @@
 //React
-import { Routes, Route, useNavigate } from "react-router-dom"
-import axios from "axios"
+import { Routes, Route, Navigate } from "react-router-dom"
+import { useContext } from "react"
+import { AuthContext } from "@/context/auth.context"
 
 //Pages
 import SignupPage from "./pages/SignupPage"
@@ -14,16 +15,50 @@ import NotFoundPage from "./pages/NotFoundPage"
 
 import React from 'react'
 
+// Component to protect private routes
+function ProtectedRoute({ children }) {
+  const { isLoggedin, isLoading } = useContext(AuthContext)
+
+  if (isLoading) return <div>Loading MedVault...</div>
+  if (!isLoggedin) return <Navigate to="/login" replace />
+
+  return children
+}
+
+// Component to redirect logged-in users away from auth pages
+function AnonRoute({ children }) {
+  const { isLoggedin, isLoading } = useContext(AuthContext)
+
+  if (isLoading) return <div>Loading MedVault...</div>
+  if (isLoggedin) return <Navigate to="/dashboard" replace />
+
+  return children
+}
+
+
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/medical-profile" element={<MedicalProfilePage />} />
-      <Route path="/medical-profile/:category" element={<MedicalProfileCategoryPage />} />
-      <Route path="/user" element={<UserProfilePage />} />
-      <Route path="/signup" element={<SignupPage />} />
-      <Route path="/login" element={<LoginPage />} />
+
+      {/* Root Path: Redirects to /signup by default */}
+      <Route path="/" element={<Navigate to="/signup" replace />} />
+
+      {/* Public / Auth Routes (Redirects to /dashboard if already logged in) */}
+
+      <Route path="/signup" element={<AnonRoute> <SignupPage /> </AnonRoute> } />
+      <Route path="/login" element={<AnonRoute> <LoginPage /> </AnonRoute>} />
+
+      {/* Protected Routes (Requires logged in user) */}
+
+      <Route path="/dashboard" element={<ProtectedRoute> <HomePage /> </ProtectedRoute>} />
+      <Route path="/medical-profile" element={<ProtectedRoute> <MedicalProfilePage /> </ProtectedRoute>} />
+      <Route path="/medical-profile/:category" element={<ProtectedRoute> <MedicalProfileCategoryPage /> </ProtectedRoute>} />
+      <Route path="/user" element={<ProtectedRoute> <UserProfilePage /> </ProtectedRoute>} />
+
+      {/* 404 Route */}
       <Route path="*" element={<NotFoundPage />} />
+
+
     </Routes>
     
   )

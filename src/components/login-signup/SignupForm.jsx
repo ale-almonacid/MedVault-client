@@ -1,6 +1,10 @@
 import React from 'react'
 
-import { Link } from "react-router-dom"
+
+import { useState, useContext } from "react"
+import { useNavigate, Link } from "react-router-dom"
+import { AuthContext } from "@/context/auth.context" // Adjust path to your AuthContext
+import service from "@/services/index.services"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -9,6 +13,7 @@ import { Label } from "@/components/ui/label"
 
 function SignupForm({ className, ...props }) {
 
+    
 
   return (
     
