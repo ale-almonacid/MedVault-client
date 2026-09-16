@@ -1,10 +1,14 @@
 import { Link } from "react-router-dom"
+
 import AvatarMenu from "@/components/navigation/AvatarMenu"
 
 //images
 import Logo from "@/assets/Logo.svg"
 
 function Navbar() {
+
+  
+
   return (
     <div className="pt-[55px] pb-[55px]">
     <div className="sticky top-4 z-50 flex justify-center">

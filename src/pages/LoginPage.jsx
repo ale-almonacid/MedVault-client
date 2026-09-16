@@ -6,6 +6,7 @@ import LoginForm from "@/components/login-signup/LoginForm"
 
 //images
 import Logo from "@/assets/Logo.svg"
+//import Background from "@/assets/fractal-glass.webp"
 import Background from "@/assets/background1.jpg"
 
 function LoginPage() {

@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 
 function AvatarMenu() {
-  const { setIsLoggedin, setLoggedUserId, user } = useContext(AuthContext)
+  const { setIsLoggedin, setLoggedUserId, setUser, user } = useContext(AuthContext)
   const navigate = useNavigate()
 
   const [isDark, setIsDark] = useState(
@@ -30,6 +30,7 @@ function AvatarMenu() {
     localStorage.removeItem("authToken")
     setIsLoggedin(false)
     setLoggedUserId(null)
+    setUser(null)
     navigate("/login")
   }
 
@@ -47,7 +48,7 @@ function AvatarMenu() {
       <DropdownMenuTrigger asChild>
         <button className="rounded-full outline-none ring-offset-2 focus-visible:ring-2 focus-visible:ring-ring">
           <Avatar>
-            <AvatarImage src={user?.avatarUrl} alt={user?.name ?? "User"} />
+            <AvatarImage src={user?.avatar} alt={user?.name ?? "User"} />
             <AvatarFallback>{initials}</AvatarFallback>
           </Avatar>
         </button>
@@ -78,18 +79,6 @@ function AvatarMenu() {
         </DropdownMenuGroup>
       </DropdownMenuContent>
     
-
-      {/* <DropdownMenuContent className="w-48" align="end">
-        <DropdownMenuLabel>{user?.name ?? "My Account"}</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => navigate("/user")}>
-          Profile
-        </DropdownMenuItem>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={handleLogout}>
-          Log out
-        </DropdownMenuItem>
-      </DropdownMenuContent> */}
 
     </DropdownMenu>
   )

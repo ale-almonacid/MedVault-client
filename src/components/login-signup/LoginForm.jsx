@@ -16,7 +16,7 @@ import { Label } from "@/components/ui/label"
 
 function LoginForm({ className, ...props }) {
 
-    const { setIsLoggedin, setLoggedUserId } = useContext(AuthContext)
+    const { setIsLoggedin, setLoggedUserId, setUser } = useContext(AuthContext)
          const navigate = useNavigate()
        
          const [email, setEmail] = useState("")
@@ -42,7 +42,8 @@ function LoginForm({ className, ...props }) {
              // Update auth states
              setIsLoggedin(true)
              setLoggedUserId(response.data.payload._id)
-       
+             setUser(response.data.payload)
+
              navigate("/dashboard")
            } catch (error) {
              console.log(error)

@@ -13,25 +13,25 @@ import {
     CardTitle,
 } from "@/components/ui/card"
 
-function MedicalProfileCard() {
+function MedicalProfileCard({ name = "Sarah Jenkins (You)", description = "Personal archive" }) {
   return (
-       <Card className="relative w-full pt-0 md:mx-auto md:max-w-sm">
-      
+    <Card className="w-full rounded-1xsm border-none p-3 md:mx-auto md:max-w-sm">
       <img
         src={CoverImage}
-        alt="Event cover"
-        className="relative z-20 aspect-video w-full object-cover "
+        alt="Profile cover"
+        className="aspect-video w-full rounded-sm object-cover"
       />
-      <CardHeader>
-        <CardTitle>hello</CardTitle>
-        <CardDescription>
-          hello
-        </CardDescription>
+      <CardHeader className="px-2 pb-2">
+        <CardTitle className="text-xl">{name}</CardTitle>
+        <CardDescription>{description}</CardDescription>
       </CardHeader>
-      <CardFooter>
-        <AvatarGroupCount></AvatarGroupCount>
+      <div className="mx-2 border-t" />
+      <CardFooter className="flex-col items-start gap-3 px-2 pt-2">
+        <span className="text-xs font-medium tracking-wider text-muted-foreground">
+          AUTHORIZED USERS
+        </span>
+        <AvatarGroupCount />
       </CardFooter>
-     
     </Card>
   )
 }

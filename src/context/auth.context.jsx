@@ -14,6 +14,7 @@ function AuthWrapper({children}){ // destructure the children form props
 
     const [isLoggedin, setIsLoggedin] = useState(false)
     const [loggedUserId, setLoggedUserId] = useState(null)
+    const [user, setUser] = useState(null)
     const [isVerifyingUser, setIsVerifyingUser] = useState(true)
 
     const verifyUser = async () =>{
@@ -36,12 +37,14 @@ function AuthWrapper({children}){ // destructure the children form props
 
            setIsLoggedin(true)
            setLoggedUserId(response.data.payload._id)
+           setUser(response.data.payload)
            setIsVerifyingUser(false)
 
         } catch (error) {
-            // the token is not valid 
+            // the token is not valid
             setIsLoggedin(false)
             setLoggedUserId(null)
+            setUser(null)
             setIsVerifyingUser(false)
         }
         
@@ -56,6 +59,9 @@ function AuthWrapper({children}){ // destructure the children form props
         setIsLoggedin,
         loggedUserId,
         setLoggedUserId,
+        user,
+        setUser,
+        isLoading: isVerifyingUser,
         verifyUser
     }
 
