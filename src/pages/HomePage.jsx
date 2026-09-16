@@ -12,7 +12,7 @@ function HomePage() {
        px-8">
         <div className="flex flex-col gap-2">
         <h1 className="heading-h1 text-slate-900">Welcome back</h1>
-        <p>All health records are encrypted in your browser before they are saved. Only you and authorized delegates can view them.</p>
+        <p className="text-muted-foreground">All health records are encrypted in your browser before they are saved. Only you and authorized delegates can view them.</p>
 
         </div>
         <Button>+ Medical Profile</Button>
