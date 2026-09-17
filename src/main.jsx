@@ -6,6 +6,7 @@ import App from './App.jsx'
 import { ThemeProvider } from './components/theme-provider'
 import { AuthWrapper } from './context/auth.context.jsx';
 import { MedicalProfileWrapper } from './context/medicalProfile.context.jsx';
+import { DocumentWrapper } from './context/document.context.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -14,7 +15,9 @@ createRoot(document.getElementById('root')).render(
 
     <AuthWrapper>
     <MedicalProfileWrapper>
+    <DocumentWrapper>
     <App />
+    </DocumentWrapper>
     </MedicalProfileWrapper>
     </AuthWrapper>
 

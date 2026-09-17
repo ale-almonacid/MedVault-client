@@ -1,6 +1,5 @@
 import React from 'react'
 import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
 import {
   Empty,
   EmptyContent,
@@ -10,7 +9,7 @@ import {
   EmptyTitle,
 } from "@/components/ui/empty"
 
-import {Plus} from "lucide-react"
+import CreateMedicalProfileModal from "@/components/dashboard/CreateMedicalProfileModal"
 
 function EmptyMedicalProfileCard({ className }) {
   return (
@@ -23,9 +22,7 @@ function EmptyMedicalProfileCard({ className }) {
         </EmptyDescription>
       </EmptyHeader>
       <EmptyContent>
-        <Button size="sm">
-           <Plus /> Medical Profile
-        </Button>
+        <CreateMedicalProfileModal />
       </EmptyContent>
     </Empty>
   )

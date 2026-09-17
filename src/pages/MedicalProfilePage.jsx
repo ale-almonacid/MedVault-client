@@ -8,6 +8,9 @@ import { ArrowLeft } from "lucide-react"
 import AvatarGroupCount from '@/components/dashboard/AvatarGroupCountComp';
 import CategoryCard from '@/components/medical-profile/CategoryCard';
 import AddCategoryModal from '@/components/medical-profile/AddCategoryModal';
+import EmptyCategoryCard from '@/components/medical-profile/EmptyCategoryCard';
+import EditMedicalProfileModal from '@/components/medical-profile/EditMedicalProfileModal';
+import DeleteMedicalProfileModal from '@/components/medical-profile/DeleteMedicalProfileModal';
 
 //images
 import CoverImage from "@/assets/background1.jpg"
@@ -57,7 +60,15 @@ function MedicalProfilePage() {
       <header className="flex flex-row items-center gap-8 p-8 bg-white">
 
       <div>
-         <h1 className="heading-h1 text-slate-900">{profile.subjectName}</h1>
+         <div className="flex flex-row items-center gap-3">
+           <h1 className="heading-h1 text-slate-900">{profile.subjectName}</h1>
+           <EditMedicalProfileModal
+             medicalProfileId={medicalProfileId}
+             subjectName={profile.subjectName}
+             description={profile.description}
+           />
+           <DeleteMedicalProfileModal medicalProfileId={medicalProfileId} />
+         </div>
          <p>{profile.description || "No description added yet."}</p>
       </div>
 
@@ -88,15 +99,23 @@ function MedicalProfilePage() {
 
       </div>
 
-      <div className="grid grid-cols-1 gap-4 py-4 md:grid-cols-2">
-        {(profile.categories || []).map((categoryId) => (
-          <CategoryCard
-            key={categoryId}
-            categoryId={categoryId}
-            to={`/medical-profile/${medicalProfileId}/${categoryId}`}
-          />
-        ))}
-      </div>
+      {(profile.categories || []).length === 0 ? (
+        <EmptyCategoryCard
+          className="mt-4"
+          medicalProfileId={medicalProfileId}
+          existingCategories={profile.categories || []}
+        />
+      ) : (
+        <div className="grid grid-cols-1 gap-4 py-4 md:grid-cols-2">
+          {(profile.categories || []).map((categoryId) => (
+            <CategoryCard
+              key={categoryId}
+              categoryId={categoryId}
+              to={`/medical-profile/${medicalProfileId}/${categoryId}`}
+            />
+          ))}
+        </div>
+      )}
 
 
 

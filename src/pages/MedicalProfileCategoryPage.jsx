@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { ArrowLeft } from "lucide-react"
 
 import categories from "@/constants/categories"
+import UploadDocumentModal from "@/components/categories/UploadDocumentModal"
 
 function MedicalProfileCategoryPage() {
 
@@ -59,7 +60,7 @@ function MedicalProfileCategoryPage() {
         <p>Upload the documents for this folder </p>
       </div>
 
-      <button>Upload document</button>
+      <UploadDocumentModal medicalProfileId={medicalProfileId} categoryId={categoryId} />
 
       </div>
 
