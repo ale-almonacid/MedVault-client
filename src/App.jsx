@@ -51,8 +51,8 @@ function App() {
       {/* Protected Routes (Requires logged in user) */}
 
       <Route path="/dashboard" element={<ProtectedRoute> <HomePage /> </ProtectedRoute>} />
-      <Route path="/medical-profile" element={<ProtectedRoute> <MedicalProfilePage /> </ProtectedRoute>} />
-      <Route path="/medical-profile/:category" element={<ProtectedRoute> <MedicalProfileCategoryPage /> </ProtectedRoute>} />
+      <Route path="/medical-profile/:medicalProfileId" element={<ProtectedRoute> <MedicalProfilePage /> </ProtectedRoute>} />
+      <Route path="/medical-profile/:medicalProfileId/:category" element={<ProtectedRoute> <MedicalProfileCategoryPage /> </ProtectedRoute>} />
       <Route path="/user" element={<ProtectedRoute> <UserProfilePage /> </ProtectedRoute>} />
 
       {/* 404 Route */}

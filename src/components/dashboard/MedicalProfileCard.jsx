@@ -19,7 +19,7 @@ function MedicalProfileCard({ profile }) {
   const authorizedUsers = [...(profile.editors || []), ...(profile.viewers || [])]
 
   return (
-    <Link to="/medical-profile" state={{ medicalProfileId: profile._id }}>
+    <Link to={`/medical-profile/${profile._id}`}>
       <Card className="w-full rounded-1xsm border-none p-3 md:mx-auto md:max-w-sm">
         <img
           src={CoverImage}

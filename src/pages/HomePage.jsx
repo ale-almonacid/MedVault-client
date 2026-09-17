@@ -10,6 +10,7 @@ import { MedicalProfileContext } from "@/context/medicalProfile.context"
 // components
 import MedicalProfileCard from "@/components/dashboard/MedicalProfileCard"
 import EmptyMedicalProfileCard from "@/components/dashboard/EmptyMedicalProfileCard"
+import CreateMedicalProfileModal from "@/components/dashboard/CreateMedicalProfileModal"
 
 function HomePage() {
 
@@ -29,9 +30,8 @@ function HomePage() {
         <p className="text-muted-foreground">All health records are encrypted in your browser before they are saved. Only you and authorized delegates can view them.</p>
 
         </div>
-         <Button  size="sm">
-           <Plus /> Medical Profile
-        </Button>
+        <CreateMedicalProfileModal></CreateMedicalProfileModal>
+        
         
       </header>
 
