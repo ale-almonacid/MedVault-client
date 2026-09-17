@@ -6,6 +6,8 @@ import Navbar from "@/components/navigation/Navbar"
 import { Button } from "@/components/ui/button"
 import { ArrowLeft } from "lucide-react"
 import AvatarGroupCount from '@/components/dashboard/AvatarGroupCountComp';
+import CategoryCard from '@/components/medical-profile/CategoryCard';
+import AddCategoryModal from '@/components/medical-profile/AddCategoryModal';
 
 //images
 import CoverImage from "@/assets/background1.jpg"
@@ -68,14 +70,29 @@ function MedicalProfilePage() {
         </div>
         <Separator></Separator>
          <AvatarGroupCount users={authorizedUsers} />
-
       </div>
-
 
       </header>
 
       </div>
 
+
+      <div className='flex flex-row'>
+
+      <div>
+        <h2>Categories</h2>
+        <p>Choose the categories of medical documents that you need </p>
+      </div>
+
+      <AddCategoryModal medicalProfileId={medicalProfileId} existingCategories={profile.categories || []} />
+
+      </div>
+
+      <div className="grid grid-cols-1 gap-4 py-4 md:grid-cols-2">
+        {(profile.categories || []).map((categoryId) => (
+          <CategoryCard key={categoryId} categoryId={categoryId} />
+        ))}
+      </div>
 
 
 
