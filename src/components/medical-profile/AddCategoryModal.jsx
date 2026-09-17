@@ -74,7 +74,7 @@ function AddCategoryModal({ medicalProfileId, existingCategories = [] }) {
         </Button>
       </DialogTrigger>
 
-      <DialogContent className="sm:max-w-lg">
+      <DialogContent className="sm:max-w-4xl">
         <form onSubmit={handleSubmit}>
           <DialogHeader>
             <DialogTitle>
@@ -87,18 +87,20 @@ function AddCategoryModal({ medicalProfileId, existingCategories = [] }) {
             </DialogDescription>
           </DialogHeader>
 
-          <div className="grid grid-cols-2 gap-4 py-4">
-            {categories.map((category) => (
-              <CategoryCard
-                key={category.id}
-                categoryId={category.id}
-                selected={selectedCategories.includes(category.id)}
-                onClick={() => toggleCategory(category.id)}
-              />
-            ))}
-          </div>
+          <div className="-mx-4 no-scrollbar max-h-[50vh] overflow-y-auto px-4">
+            <div className="grid grid-cols-2 gap-4 py-4">
+              {categories.map((category) => (
+                <CategoryCard
+                  key={category.id}
+                  categoryId={category.id}
+                  selected={selectedCategories.includes(category.id)}
+                  onClick={() => toggleCategory(category.id)}
+                />
+              ))}
+            </div>
 
-          {errorMessage && <p className="text-sm text-destructive">{errorMessage}</p>}
+            {errorMessage && <p className="text-sm text-destructive">{errorMessage}</p>}
+          </div>
 
           <DialogFooter>
             <DialogClose asChild>

@@ -90,7 +90,11 @@ function MedicalProfilePage() {
 
       <div className="grid grid-cols-1 gap-4 py-4 md:grid-cols-2">
         {(profile.categories || []).map((categoryId) => (
-          <CategoryCard key={categoryId} categoryId={categoryId} />
+          <CategoryCard
+            key={categoryId}
+            categoryId={categoryId}
+            to={`/medical-profile/${medicalProfileId}/${categoryId}`}
+          />
         ))}
       </div>
 

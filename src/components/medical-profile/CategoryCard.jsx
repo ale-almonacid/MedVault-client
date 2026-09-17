@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from "react-router-dom"
 
 import categories from "@/constants/categories"
 import { cn } from "@/lib/utils"
@@ -10,7 +11,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 
-function CategoryCard({ categoryId, selected, onClick }) {
+function CategoryCard({ categoryId, selected, onClick, to }) {
 
   const category = categories.find((item) => item.id === categoryId)
 
@@ -20,12 +21,12 @@ function CategoryCard({ categoryId, selected, onClick }) {
 
   const isSelectable = typeof onClick === "function"
 
-  return (
+  const card = (
     <Card
       onClick={onClick}
       className={cn(
-        "flex flex-row items-center gap-4 border p-4 shadow-sm",
-        isSelectable && "cursor-pointer transition-colors hover:bg-accent",
+        "flex flex-row items-center gap-4 border p-4 shadow-none",
+        (isSelectable || to) && "cursor-pointer transition-colors hover:bg-accent",
         selected && "border-primary bg-primary/5"
       )}
     >
@@ -43,6 +44,12 @@ function CategoryCard({ categoryId, selected, onClick }) {
       </CardHeader>
     </Card>
   )
+
+  if (to) {
+    return <Link to={to}>{card}</Link>
+  }
+
+  return card
 }
 
 export default CategoryCard
