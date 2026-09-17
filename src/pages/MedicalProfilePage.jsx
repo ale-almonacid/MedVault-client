@@ -59,9 +59,13 @@ function MedicalProfilePage() {
 
       <header className="flex flex-row items-center gap-8 p-8 bg-white">
 
-      <div>
-         <div className="flex flex-row items-center gap-3">
+      <div className='flex flex-row gap-15'>
+         <div className="flex flex-col gap-1">
            <h1 className="heading-h1 text-slate-900">{profile.subjectName}</h1>
+         <p>{profile.description || "No description added yet."}</p>
+         </div>
+
+         <div className='flex flex-row gap-1'>
            <EditMedicalProfileModal
              medicalProfileId={medicalProfileId}
              subjectName={profile.subjectName}
@@ -69,7 +73,6 @@ function MedicalProfilePage() {
            />
            <DeleteMedicalProfileModal medicalProfileId={medicalProfileId} />
          </div>
-         <p>{profile.description || "No description added yet."}</p>
       </div>
 
       <Separator orientation="vertical" className="h-16 self-center"></Separator>
@@ -88,10 +91,10 @@ function MedicalProfilePage() {
       </div>
 
 
-      <div className='flex flex-row'>
+      <div className='flex flex-row items-center justify-between'>
 
-      <div>
-        <h2>Categories</h2>
+      <div className='flex flex-col'>
+        <h2 className='heading-h2 text-slate-900'>Categories</h2>
         <p>Choose the categories of medical documents that you need </p>
       </div>
 

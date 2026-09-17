@@ -53,10 +53,10 @@ function MedicalProfileCategoryPage() {
       </div>
 
 
-      <div className='flex flex-row'>
+      <div className='flex flex-row items-center justify-between'>
 
-      <div>
-        <h2>Documents</h2>
+      <div className='flex flex-col'>
+        <h2 className='heading-h2 text-slate-900'>Documents</h2>
         <p>Upload the documents for this folder </p>
       </div>
 
