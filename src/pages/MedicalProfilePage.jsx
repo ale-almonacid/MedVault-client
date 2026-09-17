@@ -91,7 +91,7 @@ function MedicalProfilePage() {
       </div>
 
 
-      <div className='flex flex-row items-center justify-between'>
+      <div className='flex flex-row items-center justify-between py-6 px-4'>
 
       <div className='flex flex-col'>
         <h2 className='heading-h2 text-slate-900'>Categories</h2>

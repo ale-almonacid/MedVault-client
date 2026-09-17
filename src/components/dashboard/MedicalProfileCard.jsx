@@ -20,19 +20,24 @@ function MedicalProfileCard({ profile }) {
 
   return (
     <Link to={`/medical-profile/${profile._id}`}>
-      <Card className="w-full rounded-1xsm border-none p-3 md:mx-auto md:max-w-sm">
-        <img
-          src={CoverImage}
-          alt="Profile cover"
-          className="aspect-video w-full rounded-sm object-cover"
-        />
-        <CardHeader className="px-2 pb-2">
+      <Card className=" w-full rounded-1xsm border-none p-2 md:mx-auto md:max-w-sm">
+      
+
+        <div className="">
+
+          <div className='h-36 bg-cover bg-center bg-no-repeat rounded-md' style={{ backgroundImage: `url(${CoverImage})`}}>
+          </div>
+
+          <div className='py-4 px-2'>
           <CardTitle className="text-xl">{profile.subjectName}</CardTitle>
           <CardDescription>{profile.description || "No description added yet."}</CardDescription>
-        </CardHeader>
-        
+
+          </div>
         <Separator></Separator>
-        <div className="flex-col items-start gap-3 px-2 pt-2">
+        </div>
+        
+
+        <div className="flex flex-col items-start gap-2 px-2 pb-2">
           <span className="text-xs font-medium tracking-wider text-muted-foreground">
             AUTHORIZED USERS
           </span>

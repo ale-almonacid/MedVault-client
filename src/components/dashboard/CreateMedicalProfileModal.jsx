@@ -66,7 +66,7 @@ function CreateMedicalProfileModal() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button  size="sm">
+        <Button >
            <Plus /> Medical Profile
         </Button>
       </DialogTrigger>

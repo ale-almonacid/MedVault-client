@@ -16,7 +16,7 @@ function EmptyMedicalProfileCard({ className }) {
      <Empty className={cn("border border-dashed", className)}>
       <EmptyHeader>
         
-        <EmptyTitle>You don't have any medical profiles yet.</EmptyTitle>
+        <h2>You don't have any medical profiles yet.</h2>
         <EmptyDescription>
           Start creating one for your or your relatives.
         </EmptyDescription>

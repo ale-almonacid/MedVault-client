@@ -20,36 +20,35 @@ function CategoryCard({ categoryId, selected, onClick, to }) {
   }
 
   const isSelectable = typeof onClick === "function"
+  const Wrapper = to ? Link : React.Fragment
+  const wrapperProps = to ? { to } : {}
 
-  const card = (
-    <Card
-      onClick={onClick}
-      className={cn(
-        "flex flex-row items-center gap-4 border p-4 shadow-none",
-        (isSelectable || to) && "cursor-pointer transition-colors hover:bg-accent",
-        selected && "border-primary bg-primary/5"
-      )}
-    >
-      <div
-        id='iconWrapper'
-        className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl text-2xl"
-        style={{ backgroundColor: `${category.color}33` }}
+  return (
+    <Wrapper {...wrapperProps}>
+      <Card
+        onClick={onClick}
+        className={cn(
+          "flex flex-row items-center gap-4  p-4 shadow-none",
+          (isSelectable || to) && "cursor-pointer transition-colors hover:bg-accent",
+          selected && "border-primary bg-primary/5"
+        )}
       >
-        <span>{category.icon}</span>
-      </div>
+        <div
+          className="flex h-16 w-16 shrink-0 items-center justify-center rounded-lg text-2xl"
+          style={{ backgroundColor: `${category.color}33` }}
+        >
+          <span>{category.icon}</span>
+        </div>
 
-      <CardHeader className="gap-1 p-0">
-        <CardTitle className="text-lg">{category.name}</CardTitle>
-        <CardDescription>{category.description}</CardDescription>
-      </CardHeader>
-    </Card>
+            <div className='flex flex-col'>
+
+          <CardTitle className="text-lg">{category.name}</CardTitle>
+          <CardDescription>{category.description}</CardDescription>
+            </div>
+        
+      </Card>
+    </Wrapper>
   )
-
-  if (to) {
-    return <Link to={to}>{card}</Link>
-  }
-
-  return card
 }
 
 export default CategoryCard

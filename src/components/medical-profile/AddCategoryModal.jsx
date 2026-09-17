@@ -69,7 +69,7 @@ function AddCategoryModal({ medicalProfileId, existingCategories = [] }) {
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
-        <Button size="sm">
+        <Button >
            <Plus /> Add category
         </Button>
       </DialogTrigger>

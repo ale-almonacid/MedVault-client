@@ -16,7 +16,7 @@ function EmptyCategoryCard({ className, medicalProfileId, existingCategories = [
      <Empty className={cn("border border-dashed", className)}>
       <EmptyHeader>
 
-        <EmptyTitle>You don't have any categories yet.</EmptyTitle>
+        <h2>You don't have any categories yet.</h2>
         <EmptyDescription>
           Start adding the categories of medical documents you need.
         </EmptyDescription>

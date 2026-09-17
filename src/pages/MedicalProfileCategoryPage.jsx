@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
 import Navbar from "@/components/navigation/Navbar"
@@ -7,13 +7,22 @@ import { ArrowLeft } from "lucide-react"
 
 import categories from "@/constants/categories"
 import UploadDocumentModal from "@/components/categories/UploadDocumentModal"
+import DocumentCard from "@/components/categories/DocumentCard"
+import { DocumentContext } from "@/context/document.context"
 
 function MedicalProfileCategoryPage() {
 
   const navigate = useNavigate()
   const { medicalProfileId, category: categoryId } = useParams()
+  const { documents, isLoading, fetchDocuments } = useContext(DocumentContext)
 
   const category = categories.find((item) => item.id === categoryId)
+
+  useEffect(() => {
+    if (category) {
+      fetchDocuments(medicalProfileId, categoryId)
+    }
+  }, [medicalProfileId, categoryId])
 
   if (!category) {
     return <div className="pt-28 text-center">Category not found.</div>
@@ -53,7 +62,7 @@ function MedicalProfileCategoryPage() {
       </div>
 
 
-      <div className='flex flex-row items-center justify-between'>
+      <div className='flex flex-row items-center justify-between py-6 px-4'>
 
       <div className='flex flex-col'>
         <h2 className='heading-h2 text-slate-900'>Documents</h2>
@@ -62,6 +71,25 @@ function MedicalProfileCategoryPage() {
 
       <UploadDocumentModal medicalProfileId={medicalProfileId} categoryId={categoryId} />
 
+      </div>
+
+      {isLoading && <p className="px-4 text-muted-foreground">Loading documents...</p>}
+
+      {!isLoading && documents.length === 0 && (
+        <p className="px-4 text-muted-foreground">No documents uploaded yet.</p>
+      )}
+
+      <div className="grid grid-cols-1 gap-6 px-4 sm:grid-cols-2 lg:grid-cols-3">
+        {documents.map((document) => (
+          <a
+            key={document._id}
+            href={document.fileUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <DocumentCard document={document} />
+          </a>
+        ))}
       </div>
 
     </div>

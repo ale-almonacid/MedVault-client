@@ -47,7 +47,7 @@ function AvatarMenu() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button className="rounded-full outline-none ring-offset-2 focus-visible:ring-2 focus-visible:ring-ring">
-          <Avatar>
+          <Avatar size="lg">
             <AvatarImage src={user?.avatar} alt={user?.name ?? "User"} />
             <AvatarFallback>{initials}</AvatarFallback>
           </Avatar>
