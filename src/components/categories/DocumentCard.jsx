@@ -3,15 +3,14 @@ import { format } from "date-fns"
 
 import CoverImage from "@/assets/background1.jpg"
 
-import { Button } from "@/components/ui/button"
 import {
   Card,
   CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-
-import { Trash, Pencil } from "lucide-react"
+import EditDocumentModal from "@/components/categories/EditDocumentModal"
+import DeleteDocumentModal from "@/components/categories/DeleteDocumentModal"
 
 const languageFlags = {
   english: "fi-us",
@@ -20,7 +19,7 @@ const languageFlags = {
   french: "fi-fr",
 }
 
-function DocumentCard({ document, onEdit, onDelete }) {
+function DocumentCard({ document }) {
 
   const { title, date, language, fileUrl } = document
   const flagClass = languageFlags[language]
@@ -45,30 +44,15 @@ function DocumentCard({ document, onEdit, onDelete }) {
             <span />
           )}
 
-          <div className="flex flex-row gap-1.5">
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={(event) => {
-                event.preventDefault()
-                event.stopPropagation()
-                onEdit?.(document)
-              }}
-            >
-              <Pencil />
-            </Button>
-
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={(event) => {
-                event.preventDefault()
-                event.stopPropagation()
-                onDelete?.(document)
-              }}
-            >
-              <Trash />
-            </Button>
+          <div
+            className="flex flex-row gap-1.5"
+            onClick={(event) => {
+              event.preventDefault()
+              event.stopPropagation()
+            }}
+          >
+            <EditDocumentModal document={document} />
+            <DeleteDocumentModal document={document} />
           </div>
         </div>
 
