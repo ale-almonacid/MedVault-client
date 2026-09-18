@@ -26,7 +26,7 @@ function DocumentCard({ document, onEdit, onDelete }) {
   const flagClass = languageFlags[language]
 
   return (
-    <Card className="relative mx-auto w-full max-w-sm gap-3 pt-0">
+    <Card className="relative mx-auto w-full max-w-56 gap-3 pt-0">
       <div className="absolute inset-0 z-30 aspect-video bg-black/35" />
       <img
         src={fileUrl || CoverImage}

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
 import Navbar from "@/components/navigation/Navbar"
@@ -8,6 +8,7 @@ import { ArrowLeft } from "lucide-react"
 import categories from "@/constants/categories"
 import UploadDocumentModal from "@/components/categories/UploadDocumentModal"
 import DocumentCard from "@/components/categories/DocumentCard"
+import SearchBar from '@/components/categories/SearchBar'
 import { DocumentContext } from "@/context/document.context"
 
 function MedicalProfileCategoryPage() {
@@ -15,6 +16,7 @@ function MedicalProfileCategoryPage() {
   const navigate = useNavigate()
   const { medicalProfileId, category: categoryId } = useParams()
   const { documents, isLoading, fetchDocuments } = useContext(DocumentContext)
+  const [query, setQuery] = useState("")
 
   const category = categories.find((item) => item.id === categoryId)
 
@@ -24,6 +26,10 @@ function MedicalProfileCategoryPage() {
     }
   }, [medicalProfileId, categoryId])
 
+  const filteredDocuments = documents.filter((document) =>
+    document.title.toLowerCase().includes(query.toLowerCase())
+  )
+
   if (!category) {
     return <div className="pt-28 text-center">Category not found.</div>
   }
@@ -31,7 +37,7 @@ function MedicalProfileCategoryPage() {
   return (
     <>
      <Navbar />
-    <div id='cover' className='absolute top-0 inset-x-0 z--2 h-[33vh]' style={{ backgroundColor: category.color }}>
+    <div id='cover' className='absolute top-0 inset-x-0 z--2 h-[33vh]' style={{ backgroundColor: `${category.color}50` }}>
 
     </div>
     <div id="mainContent" className=" relative z-20 mx-auto w-full max-w-360 px-[5vw] pb-8" >
@@ -73,14 +79,22 @@ function MedicalProfileCategoryPage() {
 
       </div>
 
+      <div className="px-4 pb-8">
+        <SearchBar query={query} setQuery={setQuery} />
+      </div>
+
       {isLoading && <p className="px-4 text-muted-foreground">Loading documents...</p>}
 
       {!isLoading && documents.length === 0 && (
         <p className="px-4 text-muted-foreground">No documents uploaded yet.</p>
       )}
 
-      <div className="grid grid-cols-1 gap-6 px-4 sm:grid-cols-2 lg:grid-cols-3">
-        {documents.map((document) => (
+      {!isLoading && documents.length > 0 && filteredDocuments.length === 0 && (
+        <p className="px-4 text-muted-foreground">No documents match "{query}".</p>
+      )}
+
+      <div className="grid grid-cols-1 gap-6 px-4 sm:grid-cols-2 lg:grid-cols-4">
+        {filteredDocuments.map((document) => (
           <a
             key={document._id}
             href={document.fileUrl}
