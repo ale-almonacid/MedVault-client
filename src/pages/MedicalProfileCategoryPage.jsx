@@ -48,7 +48,7 @@ function MedicalProfileCategoryPage() {
       <ArrowLeft/> Go back
       </Button>
 
-      <header className="flex flex-row items-center gap-8 p-8 bg-white">
+      <header className="flex flex-row items-center gap-8 p-8 bg-white/40 backdrop-blur-lg border border-white/30 shadow-[0_3px_47px_rgba(28,41,115,0.08)] rounded-[8px]">
 
       <div
         id='iconWrapper'

@@ -22,7 +22,7 @@ function Navbar() {
            
           </Link>
 
-          <div className="hidden items-center gap-6 text-sm text-muted-foreground sm:flex">
+          <div className="hidden items-center gap-6 text-sm text-foreground sm:flex">
             <Link to="/dashboard" className="hover:text-foreground">
               Dashboard
             </Link>

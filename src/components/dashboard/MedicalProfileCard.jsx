@@ -20,7 +20,7 @@ function MedicalProfileCard({ profile }) {
 
   return (
     <Link to={`/medical-profile/${profile._id}`}>
-      <Card className=" w-full rounded-1xsm border-none p-2 md:mx-auto md:max-w-sm">
+      <Card className=" w-full rounded-1xsm border-none p-2 md:mx-auto md:max-w-sm  bg-white/40 backdrop-blur-lg borderborder-white/30 shadow-[0_3px_47px_rgba(28,41,115,0.08)]">
       
 
         <div className="">

@@ -57,7 +57,7 @@ function MedicalProfilePage() {
       <ArrowLeft/> Go back
       </Button>
 
-      <header className="flex flex-row items-center gap-8 p-8 bg-white">
+      <header className="flex flex-row items-center gap-8 p-8 bg-white/40 backdrop-blur-lg border border-white/30 shadow-[0_3px_47px_rgba(28,41,115,0.08)] rounded-[8px]">
 
       <div className='flex flex-row gap-15'>
          <div className="flex flex-col gap-1">
@@ -77,8 +77,8 @@ function MedicalProfilePage() {
 
       <Separator orientation="vertical" className="h-16 self-center"></Separator>
 
-      <div id='authorized users' className='p-4 bg-white'>
-        <div className='flex flex-row items-center gap-5 p-2'>
+      <div id='authorized users' className='flex flex-col gap-2 p-4 bg-[rgba(105,115,135,0.1)] rounded-[8px]'>
+        <div className='flex flex-row items-center gap-5 '>
         <h3>Authorised users</h3>
         <Button>edit</Button>
         </div>
