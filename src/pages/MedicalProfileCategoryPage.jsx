@@ -10,20 +10,27 @@ import UploadDocumentModal from "@/components/categories/UploadDocumentModal"
 import DocumentCard from "@/components/categories/DocumentCard"
 import SearchBar from '@/components/categories/SearchBar'
 import { DocumentContext } from "@/context/document.context"
+import { MedicalProfileContext } from "@/context/medicalProfile.context"
+import { AuthContext } from "@/context/auth.context"
 
 function MedicalProfileCategoryPage() {
 
   const navigate = useNavigate()
   const { medicalProfileId, category: categoryId } = useParams()
   const { documents, isLoading, fetchDocuments } = useContext(DocumentContext)
+  const { medicalProfiles, fetchMedicalProfiles } = useContext(MedicalProfileContext)
+  const { loggedUserId } = useContext(AuthContext)
   const [query, setQuery] = useState("")
 
   const category = categories.find((item) => item.id === categoryId)
+  const profile = medicalProfiles.find((p) => p._id === medicalProfileId)
+  const isEditor = profile ? (profile.editors || []).some((editor) => editor._id === loggedUserId) : false
 
   useEffect(() => {
     if (category) {
       fetchDocuments(medicalProfileId, categoryId)
     }
+    fetchMedicalProfiles()
   }, [medicalProfileId, categoryId])
 
   const filteredDocuments = documents.filter((document) =>
@@ -75,7 +82,9 @@ function MedicalProfileCategoryPage() {
         <p>Upload the documents for this folder </p>
       </div>
 
-      <UploadDocumentModal medicalProfileId={medicalProfileId} categoryId={categoryId} />
+      {isEditor && (
+        <UploadDocumentModal medicalProfileId={medicalProfileId} categoryId={categoryId} />
+      )}
 
       </div>
 
@@ -101,7 +110,7 @@ function MedicalProfileCategoryPage() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <DocumentCard document={document} />
+            <DocumentCard document={document} canEdit={isEditor} />
           </a>
         ))}
       </div>

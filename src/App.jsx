@@ -10,6 +10,7 @@ import HomePage from "@/pages/HomePage"
 import UserProfilePage from "./pages/UserProfilePage"
 import MedicalProfilePage from "./pages/MedicalProfilePage"
 import MedicalProfileCategoryPage from "./pages/MedicalProfileCategoryPage"
+import AuthorisedUsersPage from "./pages/AuthorisedUsersPage"
 import NotFoundPage from "./pages/NotFoundPage"
 
 
@@ -52,6 +53,7 @@ function App() {
 
       <Route path="/dashboard" element={<ProtectedRoute> <HomePage /> </ProtectedRoute>} />
       <Route path="/medical-profile/:medicalProfileId" element={<ProtectedRoute> <MedicalProfilePage /> </ProtectedRoute>} />
+      <Route path="/medical-profile/:medicalProfileId/authorised-users" element={<ProtectedRoute> <AuthorisedUsersPage /> </ProtectedRoute>} />
       <Route path="/medical-profile/:medicalProfileId/:category" element={<ProtectedRoute> <MedicalProfileCategoryPage /> </ProtectedRoute>} />
       <Route path="/user" element={<ProtectedRoute> <UserProfilePage /> </ProtectedRoute>} />
 

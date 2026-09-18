@@ -19,7 +19,7 @@ const languageFlags = {
   french: "fi-fr",
 }
 
-function DocumentCard({ document }) {
+function DocumentCard({ document, canEdit }) {
 
   const { title, date, language, fileUrl } = document
   const flagClass = languageFlags[language]
@@ -44,16 +44,18 @@ function DocumentCard({ document }) {
             <span />
           )}
 
-          <div
-            className="flex flex-row gap-1.5"
-            onClick={(event) => {
-              event.preventDefault()
-              event.stopPropagation()
-            }}
-          >
-            <EditDocumentModal document={document} />
-            <DeleteDocumentModal document={document} />
-          </div>
+          {canEdit && (
+            <div
+              className="flex flex-row gap-1.5"
+              onClick={(event) => {
+                event.preventDefault()
+                event.stopPropagation()
+              }}
+            >
+              <EditDocumentModal document={document} />
+              <DeleteDocumentModal document={document} />
+            </div>
+          )}
         </div>
 
         <CardTitle>{title}</CardTitle>

@@ -17,6 +17,7 @@ import CoverImage from "@/assets/background1.jpg"
 
 // context
 import { MedicalProfileContext } from "@/context/medicalProfile.context"
+import { AuthContext } from "@/context/auth.context"
 import { useNavigate, useParams } from 'react-router-dom'
 import { Separator } from '@/components/ui/separator'
 
@@ -26,6 +27,7 @@ function MedicalProfilePage() {
   const { medicalProfileId } = useParams()
 
   const { medicalProfiles, isLoading, fetchMedicalProfiles } = useContext(MedicalProfileContext)
+  const { loggedUserId } = useContext(AuthContext)
 
   useEffect(() => {
     fetchMedicalProfiles()
@@ -34,6 +36,7 @@ function MedicalProfilePage() {
   const profile = medicalProfiles.find((p) => p._id === medicalProfileId)
 
   const authorizedUsers = profile ? [...(profile.editors || []), ...(profile.viewers || [])] : []
+  const isEditor = profile ? (profile.editors || []).some((editor) => editor._id === loggedUserId) : false
 
   if (isLoading) {
     return <div className="pt-28 text-center">Loading medical profile...</div>
@@ -65,14 +68,16 @@ function MedicalProfilePage() {
          <p>{profile.description || "No description added yet."}</p>
          </div>
 
-         <div className='flex flex-row gap-1'>
-           <EditMedicalProfileModal
-             medicalProfileId={medicalProfileId}
-             subjectName={profile.subjectName}
-             description={profile.description}
-           />
-           <DeleteMedicalProfileModal medicalProfileId={medicalProfileId} />
-         </div>
+         {isEditor && (
+           <div className='flex flex-row gap-1'>
+             <EditMedicalProfileModal
+               medicalProfileId={medicalProfileId}
+               subjectName={profile.subjectName}
+               description={profile.description}
+             />
+             <DeleteMedicalProfileModal medicalProfileId={medicalProfileId} />
+           </div>
+         )}
       </div>
 
       <Separator orientation="vertical" className="h-16 self-center"></Separator>
@@ -80,7 +85,15 @@ function MedicalProfilePage() {
       <div id='authorized users' className='flex flex-col gap-2 p-4 bg-[rgba(105,115,135,0.1)] rounded-[8px]'>
         <div className='flex flex-row items-center gap-5 '>
         <h3>Authorised users</h3>
-        <Button>edit</Button>
+        {isEditor && (
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => navigate(`/medical-profile/${medicalProfileId}/authorised-users`)}
+          >
+            edit
+          </Button>
+        )}
         </div>
         <Separator></Separator>
          <AvatarGroupCount users={authorizedUsers} />
@@ -98,16 +111,22 @@ function MedicalProfilePage() {
         <p>Choose the categories of medical documents that you need </p>
       </div>
 
-      <AddCategoryModal medicalProfileId={medicalProfileId} existingCategories={profile.categories || []} />
+      {isEditor && (
+        <AddCategoryModal medicalProfileId={medicalProfileId} existingCategories={profile.categories || []} />
+      )}
 
       </div>
 
       {(profile.categories || []).length === 0 ? (
-        <EmptyCategoryCard
-          className="mt-4"
-          medicalProfileId={medicalProfileId}
-          existingCategories={profile.categories || []}
-        />
+        isEditor ? (
+          <EmptyCategoryCard
+            className="mt-4"
+            medicalProfileId={medicalProfileId}
+            existingCategories={profile.categories || []}
+          />
+        ) : (
+          <p className="mt-4 text-muted-foreground">No categories have been added yet.</p>
+        )
       ) : (
         <div className="grid grid-cols-1 gap-4 py-4 md:grid-cols-2">
           {(profile.categories || []).map((categoryId) => (
