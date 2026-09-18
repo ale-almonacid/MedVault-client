@@ -159,7 +159,7 @@ function AuthorisedUsersPage() {
   return (
     <>
       <Navbar />
-      <div id="mainContent" className="relative z-20 mx-auto w-full max-w-360 px-[5vw] pb-8">
+      <div id="mainContent" className="relative z-20 mx-auto w-full max-w-360 px-[8vw] pb-8">
 
         <div className="flex w-fit flex-col gap-4">
           <header className="flex flex-col gap-6 p-8 bg-white">

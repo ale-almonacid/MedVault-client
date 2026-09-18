@@ -52,15 +52,20 @@ function MedicalProfilePage() {
     <div id='cover' className='absolute top-0 inset-x-0 z--2  h-[33vh] bg-cover bg-center bg-no-repeat' style={{ backgroundImage: `url(${CoverImage})`}}>
 
     </div>
-    <div id="mainContent" className=" relative z-20 mx-auto w-full max-w-360 px-[5vw] pb-8" >
+    <div id="mainContent" className=" relative z-20 mx-auto w-full max-w-360 px-[8vw] pb-8" >
 
       <div id='headerWrapper' className='flex w-fit flex-col gap-4'>
 
-      <Button  variant="outline" size="sm" onClick={() => navigate("/dashboard")} className="w-fit ">
+      <Button
+        variant="outline"
+        size="sm"
+        onClick={() => navigate("/dashboard")}
+        className="w-fit bg-white/70 backdrop-blur-lg border border-white/30 shadow-[0_3px_47px_rgba(28,41,115,0.08)] rounded-[8px]"
+      >
       <ArrowLeft/> Go back
       </Button>
 
-      <header className="flex flex-row items-center gap-8 p-8 bg-white/40 backdrop-blur-lg border border-white/30 shadow-[0_3px_47px_rgba(28,41,115,0.08)] rounded-[8px]">
+      <header className="flex flex-row items-center gap-8 p-8 bg-white/70 backdrop-blur-lg border border-white/30 shadow-[0_3px_47px_rgba(28,41,115,0.08)] rounded-[8px]">
 
       <div className='flex flex-row gap-15'>
          <div className="flex flex-col gap-1">
@@ -80,7 +85,7 @@ function MedicalProfilePage() {
          )}
       </div>
 
-      <Separator orientation="vertical" className="h-16 self-center"></Separator>
+      <Separator orientation="vertical"></Separator>
 
       <div id='authorized users' className='flex flex-col gap-2 p-4 bg-[rgba(105,115,135,0.1)] rounded-[8px]'>
         <div className='flex flex-row items-center gap-5 '>

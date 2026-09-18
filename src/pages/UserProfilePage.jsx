@@ -22,8 +22,9 @@ function UserProfilePage() {
   }
 
   return (
-      <div id="content" className="mx-auto w-full max-w-360 px-[5vw] pb-8" >
+    <>
       <Navbar />
+      <div id="content" className="mx-auto w-full max-w-360 px-[8vw] pb-8" >
       <header className="flex flex-row gap-8 items-center px-8 bg-white/70 p-5 rounded-lg shadow-[0_3px_53px_rgba(28,41,115,0.08)]">
         <div className="relative h-24 w-24 min-w-24">
           <div id="Avatar" className="h-24 w-24 min-w-24 rounded-full bg-cover bg-center border border-slate-200/60"
@@ -95,6 +96,7 @@ function UserProfilePage() {
 
 
       </div>
+    </>
   )
 }
 

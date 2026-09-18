@@ -47,11 +47,16 @@ function MedicalProfileCategoryPage() {
     <div id='cover' className='absolute top-0 inset-x-0 z--2 h-[33vh]' style={{ backgroundColor: `${category.color}50` }}>
 
     </div>
-    <div id="mainContent" className=" relative z-20 mx-auto w-full max-w-360 px-[5vw] pb-8" >
+    <div id="mainContent" className=" relative z-20 mx-auto w-full max-w-360 px-[8vw] pb-8" >
 
       <div id='headerWrapper' className='flex w-fit flex-col gap-4'>
 
-      <Button  variant="outline" size="sm" onClick={() => navigate(`/medical-profile/${medicalProfileId}`)} className="w-fit ">
+      <Button
+        variant="outline"
+        size="sm"
+        onClick={() => navigate(`/medical-profile/${medicalProfileId}`)}
+        className="w-fit bg-white/60 backdrop-blur-lg border border-white/30 shadow-[0_3px_47px_rgba(28,41,115,0.08)] rounded-[8px]"
+      >
       <ArrowLeft/> Go back
       </Button>
 
